@@ -59,15 +59,12 @@ app.controller('navCtrl', function ($scope, $window) {
     $scope.reload = function () {
         $window.location.reload();
     }
-
-    $scope.$watch('$viewContentLoaded', function(){
-        $scope.menuIndice = localStorage.getItem("menuIndice");
-    });
 });
 
 app.controller('uploadCtrl', function ($scope, $http, Upload, $timeout, newVideo) {
-    $scope.$watch('$viewContentLoaded', function(){
-        localStorage.setItem("menuIndice", 2);
+    $scope.$watch('$viewContentLoaded', function () {
+        document.getElementById('indice2').className = "active";
+        document.getElementById('indice1').className = "";
     });
 
     newVideo.reset();
@@ -178,8 +175,9 @@ app.controller('uploadCtrl', function ($scope, $http, Upload, $timeout, newVideo
 });
 
 app.controller('videoCtrl', function ($scope, videos) {
-    $scope.$watch('$viewContentLoaded', function(){
-        localStorage.setItem("menuIndice", 1);
+    $scope.$watch('$viewContentLoaded', function () {
+        document.getElementById('indice1').className = "active";
+        document.getElementById('indice2').className = "";
     });
 
     $scope.find = function () {
