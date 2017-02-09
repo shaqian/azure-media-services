@@ -27,11 +27,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Azure Media Services with AngularJS</a>
+            <a class="navbar-brand" ng-click="reload()" href="#">Azure Media Services with AngularJS</a>
         </div>
         <div class="navbar-collapse" uib-collapse="isCollapsed">
             <ul class="nav navbar-nav">
-                <li ng-class="menuIndice == 1 ? 'active' : ''"><a ng-click="menuIndice = 1" href="#!/videos">All Videos</a></li>
+                <li ng-class="menuIndice == 1 ? 'active' : ''"><a ng-click="reload()" href="#!/videos">All Videos</a></li>
                 <li ng-class="menuIndice == 2 ? 'active' : ''"><a ng-click="menuIndice = 2" href="#!/upload">Upload</a></li>
             </ul>
         </div>

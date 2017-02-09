@@ -14,10 +14,6 @@ app.config(['$routeProvider', function($routeProvider) {
             templateUrl: 'views/videos.html',
             controller: 'videoCtrl'
         }).
-        when('/player', {
-            templateUrl: 'views/player.html',
-            controller: 'uploadCtrl'
-        }).
         when('/upload', {
             templateUrl: 'views/upload.html',
             controller: 'uploadCtrl'
@@ -57,11 +53,23 @@ app.factory("newVideo", function() {
     return current_data;
 });
 
-app.controller('navCtrl', function ($scope) {
+app.controller('navCtrl', function ($scope, $window) {
     $scope.isCollapsed = true;
+
+    $scope.reload = function () {
+        $window.location.reload();
+    }
+
+    $scope.$watch('$viewContentLoaded', function(){
+        $scope.menuIndice = localStorage.getItem("menuIndice");
+    });
 });
 
 app.controller('uploadCtrl', function ($scope, $http, Upload, $timeout, newVideo) {
+    $scope.$watch('$viewContentLoaded', function(){
+        localStorage.setItem("menuIndice", 2);
+    });
+
     newVideo.reset();
     $scope.uploaderror = false;
     $scope.uploadsuccess = false;
@@ -155,7 +163,6 @@ app.controller('uploadCtrl', function ($scope, $http, Upload, $timeout, newVideo
             canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
             var image = canvas.toDataURL();
             newVideo.thumbnail = image;
-            console.log(newVideo.thumbnail);
             return cb();
         };
     }
@@ -171,6 +178,10 @@ app.controller('uploadCtrl', function ($scope, $http, Upload, $timeout, newVideo
 });
 
 app.controller('videoCtrl', function ($scope, videos) {
+    $scope.$watch('$viewContentLoaded', function(){
+        localStorage.setItem("menuIndice", 1);
+    });
+
     $scope.find = function () {
         $scope.videoloader = true;
         $scope.videos = videos.query(function () {
@@ -197,13 +208,13 @@ app.controller('videoCtrl', function ($scope, videos) {
         if(vid === 0){
             $scope.playVideo = false;
             var myPlayer = amp('vid1');
+            myPlayer.pause();
             myPlayer.src([{
                 src: ""
             }]);
         }else{
             var streamingURL = vid.streamingURL;
             var filename = vid.filename.split('.')[0] + '.ism';
-            console.log(streamingURL, filename);
             var myPlayer = amp('vid1', { /* Options */
                     logo: { "enabled": false },
                     techOrder: ["azureHtml5JS", "flashSS", "html5FairPlayHLS","silverlightSS", "html5"],
@@ -221,6 +232,7 @@ app.controller('videoCtrl', function ($scope, videos) {
                     });
                 }
             );
+            myPlayer.pause();
             myPlayer.src([{
                 src: streamingURL + filename + "/manifest",
                 type: "application/vnd.ms-sstr+xml"
