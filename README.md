@@ -1,3 +1,5 @@
+# Video on Demand in Azure Media Services with AngularJS and NodeJS
+
 ## Introduction:
 
 When using Azure Media Services to deliver videos on demand, you have to first upload the content to the Azure Storage associated with the Media Services account. This includes several requests to Azure Media Services to create an asset, an asset file, a write permission access policy and a locator. The locator contains a SAS URL with write access which the client can use to upload the video to storage. If you're running a VOD website, the "client" to Azure Media Services is usually your web server, in which case when the user of your website publishes a video, the video is sent from his/her device to the web server first, then the web server passes it on to the storage. 
