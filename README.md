@@ -41,11 +41,11 @@ AngularJS  ------------------  NodeJS  ------------------  Azure Media Services
 
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|<----------- SAS URL ------------|
 
-&emsp;&emsp;|<------- SAS URL --------|
+&emsp;&emsp;|<------- SAS URL -------|
 
 &emsp;&emsp;|---------------------------------------------- video ----------------------------------> Azure Blob Storage
 
-&emsp;&emsp;|---- encode request ---->|
+&emsp;&emsp;|---- encode request --->|
 
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|------- update asset file ------->|
 
@@ -67,7 +67,7 @@ AngularJS  ------------------  NodeJS  ------------------  Azure Media Services
 
 &emsp;&emsp;|<----- streaming url -----|
 
-&emsp;&emsp;|------------------------- playback -------------------------->|
+&emsp;&emsp;|------------------------- playback ------------------------>|
 
 ## Run the sample:
 
