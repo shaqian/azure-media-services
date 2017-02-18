@@ -118,9 +118,6 @@ app.controller('uploadCtrl', function ($scope, $http, Upload, $timeout, newVideo
                 },
                 data: e.target.result
             }).then(function (resp) {
-                if (resp.status > 0)
-                    $scope.errorMsg = resp.status + ': ' + resp.data;
-
                 if (resp.status == '201'){
                     $http.post('/encode/' + newVideo.rawAssetId, {'size': file.size, 'thumbnail': newVideo.thumbnail})
                         .then(function successCallback(response){
@@ -129,6 +126,10 @@ app.controller('uploadCtrl', function ($scope, $http, Upload, $timeout, newVideo
                             $scope.uploaderror = true;
                             $scope.errorMsg = error;
                         });
+                }
+                else{
+                    $scope.uploaderror = true;
+                    $scope.errorMsg = resp.status + ': ' + resp.data;
                 }
             }, function (error) {
                 $scope.uploaderror = true;
