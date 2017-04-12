@@ -41,6 +41,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'app')));
+app.use('/bower_components',express.static(path.join(__dirname,'bower_components')));
 
 // angular
 app.get('/', function (req, res) {
